@@ -6,7 +6,17 @@ import { Link } from 'react-router-dom'
 
 
 let tok= JSON.parse(localStorage.getItem("user-info"));
-let refresh = tok.refresh_token
+const term = (tok) => {
+  let refval;  
+  if (tok === null || typeof tok === 'undefined') {
+    refval = 0;
+  } else {
+    refval = tok.refresh_token;
+  }
+
+  return refval;
+}
+let refresh = term(tok)
  
 const FundPage =()=>{
   const [data, setData] = useState('')

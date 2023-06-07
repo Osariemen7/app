@@ -19,7 +19,7 @@ const ListPage=()=>{
   let tick = location.state.data
   const term = (tick) => {
     let nam;
-    if (tick.length === 0 || tick === null) {
+    if (typeof tick=== 'undefined' || tick === null) {
       nam = "";
     } else {
       nam = tick.name;

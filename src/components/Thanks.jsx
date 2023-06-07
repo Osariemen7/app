@@ -7,18 +7,17 @@ const ThankPage=()=>{
      const navigate= useNavigate()
     
      let tok= JSON.parse(localStorage.getItem("user-info"));
-     const terms = (tok) => {
-      let refreshval;
-    
-      if (tok.length === 0) {
-        refreshval = 0;
+     const term = (tok) => {
+      let refval;  
+      if (tok === null || typeof tok === 'undefined') {
+        refval = 0;
       } else {
-        refreshval = tok.refresh_token;
+        refval = tok.refresh_token;
       }
     
-      return refreshval;
-    };
-    let refresh = terms(tok)
+      return refval;
+    }
+    let refresh = term(tok)
      async function create(e) {
         e.preventDefault();
         let ite ={refresh}
