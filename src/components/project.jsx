@@ -3,7 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import plus from './images/plus.svg';
 
 let tok= JSON.parse(localStorage.getItem("user-info"));
-  let refresh = tok.refresh_token
+const terms = (tok) => {
+  let refreshval;
+
+  if ( tok === null || typeof tok === "undefined" ) {
+    refreshval = 0;
+  } else {
+    refreshval = tok.refresh_token;
+  }
+
+  return refreshval;
+};
+let refresh = terms(tok)
   
    
 
@@ -67,7 +78,7 @@ const ProjectPage =()=>{
       method: "GET",
       headers:{'Authorization': `Bearer ${bab}`},
       })
-      //localStorage.setItem('user-info', JSON.stringify(item))
+      //localStorage.setItem('user-info', JSON.stringify(tok))
       response = await response.json()
       setInfo(response)
       setLoading(false)
@@ -82,6 +93,7 @@ const ProjectPage =()=>{
     
    // console.log(nam) 
    console.log(tok)
+   console.log()
   const show=()=>{
     
      navigate('/components/Addlist')

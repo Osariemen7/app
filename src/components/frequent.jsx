@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-let pan= JSON.parse(localStorage.getItem("user-info"));
+
 const Frequent =()=>{
   const [often, setOften] = useState('');
   const [clickedItem, setClickedItem] = useState(null);
@@ -10,7 +10,19 @@ const Frequent =()=>{
   const [backgroundColor2, setBackgroundColor2] = useState('');
   const [backgroundColor3, setBackgroundColor3] = useState('');
   const navigate = useNavigate()
+  const location = useLocation();
+  let pin = location.state.pro
+  const terms = (pin) => {
+    let nam;  
+    if (pin.length === 0) {
+      nam = 'null';
+    } else {
+      nam = pin
+    }
   
+    return nam;
+  };
+  let pan= terms(pin)
   
   const valueChange = (event) => {
     setClickedItem(event.target.value)
@@ -43,10 +55,9 @@ const Frequent =()=>{
      e.preventDefault()
      console.warn(clickedItem, often, pan)
      let pal ={clickedItem, often, pan}
-     localStorage.setItem('user', JSON.stringify(pal))
-     navigate('/components/select')
+     navigate('/components/select', {state:{pal}})
   }
-console.log(pan)
+console.log(pin)
     return(
         <div>
            <div>
@@ -91,7 +102,7 @@ console.log(pan)
             </div>  
             <p>{clickedItem}</p>  
         </div>
-            <button onClick={review} className="but1">Continue</button>
+            <button onClick={review} className="logb">Continue</button>
         </div>
     )
     

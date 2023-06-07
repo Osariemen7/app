@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,  useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 
-let tick= JSON.parse(localStorage.getItem("user-info"));
-let name = tick.name
-let refresh = tick.refr
+// let tick= JSON.parse(localStorage.getItem("user-info"));
+
+
 const ListPage=()=>{
     const [message, setMessage] = useState("")
     const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +15,18 @@ const ListPage=()=>{
     const [is_purchase, setIspurchase] = useState(true)
     const [often, setOften] = useState('');
     const navigate = useNavigate()
-    
+    const location = useLocation();
+  let tick = location.state.data
+  const term = (tick) => {
+    let nam;
+    if (tick.length === 0 || tick === null) {
+      nam = "";
+    } else {
+      nam = tick.name;
+    }
+    return nam;
+  };
+  let name = term(tick)
     const handleChange =(event)=> {
       setOften(event.target.value)
     }
@@ -53,19 +64,19 @@ const ListPage=()=>{
         if (asset_name1.length < 1) {
           setMessage('Please Add items')
         } else {
-          let asset_name =asset_name1.toString()
-          let asset_price= asset_price1.toString()
+          let asset_name =(asset_name1.toString())
+          let asset_price= (asset_price1.toString())
           let assets = [{asset_name, asset_price, is_purchase}]
-          let pro = {assets, name, tota, refresh}
-          localStorage.setItem('user-info', JSON.stringify(pro))
-            navigate('/components/frequent')
+          let pro = {assets, name, tota}
+          
+                navigate('/components/frequent', {state:{pro}})
         }
      }
   console.log(tick)
     return(
         <div>
             <Link to='/components/createp'><i class="fa-solid fa-chevron-left bac" onClick={openModal}></i></Link>
-            <h3>What do you intend to purchas<br/> or lease as part of this project?</h3>
+            <h3>What do you intend to purchase<br/> or lease as part of this project?</h3>
             <p>Add a list of resource you will need for this project<br/>eg land for farming, Equipment</p>
             <h1 >₦{total}</h1>
             <p className="listp">Estimated amount needed for your business</p>
@@ -83,7 +94,7 @@ const ListPage=()=>{
                   ))}
                  </ul>
            </div>
-           <hr></hr>
+           
             </div>
             <Modal
             className='modal'

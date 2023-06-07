@@ -8,7 +8,18 @@ const Accounts =()=> {
     const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
     let tok= JSON.parse(localStorage.getItem("user-info"));
-  let refresh = tok.refresh_token
+    const terms = (tok) => {
+      let refreshval;
+    
+      if (tok.length === 0) {
+        refreshval = 0;
+      } else {
+        refreshval = tok.refresh_token;
+      }
+    
+      return refreshval;
+    };
+    let refresh = terms(tok)
 
   
 

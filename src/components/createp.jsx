@@ -1,7 +1,18 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 let tok= JSON.parse(localStorage.getItem("user-info"));
-  let refresh = tok.refresh_token
+const terms = (tok) => {
+  let refreshval;
+
+  if (tok.length === 0 || typeof tok === 'undefined')  {
+    refreshval = 0;
+  } else {
+    refreshval = tok.refresh_token;
+  }
+
+  return refreshval;
+};
+let refresh = terms(tok)
 const CreatePage =()=>{
     const navigate = useNavigate()
     const [name, setName] = useState('')
@@ -21,8 +32,8 @@ const CreatePage =()=>{
         console.warn(name, payment_amount, refr)
         let data = {name, payment_amount, refr}
         if (name.length > 1) {
-            localStorage.setItem('user-info', JSON.stringify(data))
-            navigate('/components/listp')
+            
+            navigate('/components/listp', {state:{data}})
             
           } else {
             setMessage("Both field must be filled");

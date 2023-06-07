@@ -1,9 +1,32 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-let tok= JSON.parse(localStorage.getItem("user-info"));
-  let refresh = tok.refresh_token
-  let bane = tok.first_name
 
+let tok = JSON.parse(localStorage.getItem("user-info"));
+const terms = (tok) => {
+    let refreshval;
+  
+    if ( typeof tok ==='undefined' || tok === null) {
+      refreshval = 0;
+    } else {
+      refreshval = tok.refresh_token;
+    }
+  
+    return refreshval;
+  };
+  let refresh = terms(tok)
+  const term = (tok) => {
+    let banes 
+    if (typeof tok === 'undefined' || tok === null) {
+    
+     banes = "";
+    } else {
+      banes = tok.first_name;;
+    }
+  
+    return banes;
+  };
+  let bane = term(tok)
+  
 const PersonalPage =() => {
     const [message, setMessage] = useState("");
     const [gender, setGender] = useState('');
@@ -87,7 +110,7 @@ async function bus(e) {
             <p>Please enter your BVN, regulations require us<br/> to verify your identity</p>
             <form>
                 <p className='sp'>Gender</p>
-                <select onChange={handleGender} className="li">
+                <select onChange={handleGender} className="line">
                     <option></option>
                     <option>Female</option>
                     <option>Male</option>
@@ -144,15 +167,13 @@ async function bus(e) {
                  <br/>
                  <p className='sp'>City</p>
                  <input className="line" onChange={handleCity} type="text" placeholder="Enter City" /><br/>
-                 <p className='sp'>Postal Code</p>
-                 <input className="line" type="text" placeholder="Enter Postal Code" /><br/><br/>
                  <h2>Hi {bane}, tell us about<br /> your business</h2>
             <p>Prestige finance is legally required to collect this information</p>
             
                 <p className='sp'>Business Name</p>
                 <input type="text" onChange={handleBusiness} className="line" />
                 <p className='sp'>Type of Business</p>
-                <select className="li" onChange={handleBusinesstype}>
+                <select className="line" onChange={handleBusinesstype}>
                     <option> </option>
                     <option>Agency Banking</option>
                     <option>Fast Food Restuarants</option>

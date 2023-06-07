@@ -2,7 +2,18 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Vector from './images/Vector.svg';
 let tok= JSON.parse(localStorage.getItem("user-info"));
-  let refresh = tok.refresh_token
+const terms = (tok) => {
+  let refreshval;
+
+  if (tok.length === 0) {
+    refreshval = 0;
+  } else {
+    refreshval = tok.refresh_token;
+  }
+
+  return refreshval;
+};
+let refresh = terms(tok)
 
 const Addlist=()=>{
   const [info, setInfo] = useState('')
@@ -31,6 +42,7 @@ const Addlist=()=>{
 useEffect(() => {
   fetchDa()
 }, [])
+console.log(tok)
 if(loading) {
   return(
   <p>Loading</p>)

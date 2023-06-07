@@ -1,18 +1,81 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Vector from './images/Vector.svg';
 
-let pane= JSON.parse(localStorage.getItem("user"));
-let name = pane.pan.name
-let tota = pane.pan.tota
-let total = (tota).toLocaleString('en-US')
-let payment_amount = pane.clickedItem
-let payment_frequency = pane.often
-let assets =pane.pan.assets 
-let refresh = pane.pan.refresh
+let tok= JSON.parse(localStorage.getItem("user-info"));
+const term = (tok) => {
+  let refval;  
+  if (tok.length === 0 || typeof tok === 'undefined') {
+    refval = 0;
+  } else {
+    refval = tok.refresh_token;
+  }
+
+  return refval;
+}
+let refresh = term(tok)
 const Select =()=> {
     const [message, setMessage] = useState('')
     const navigate = useNavigate()
+    const location = useLocation();
+  let pane = location.state.pal
+  const terms = (pane) => {
+    let nam;  
+    if (pane.length === 0) {
+      nam = 'null';
+    } else {
+      nam = pane.pan.name;
+    }
+  
+    return nam;
+  };
+  let name = terms(pane)
+  
+  const term1 = (pane) => {
+    let tots;  
+    if (typeof pane === 'undefined' || pane === null || pane.length < 6) {
+      tots = 0;
+    } else {
+      tots= pane.pan.tota;
+    }
+  
+    return tots;
+  }
+  let tota = term1(pane)
+  let total = (tota).toLocaleString('en-US')
+  const term2 = (pane) => {
+    let pay;  
+    if (pane.length === 0) {
+      pay = 0;
+    } else {
+      pay = pane.clickedItem;
+    }
+  
+    return pay;
+  }
+  let payment_amount = term2(pane)
+  const term3 = (pane) => {
+    let pays;  
+    if (pane.length === 0) {
+      pays = 0;
+    } else {
+      pays = pane.often;
+    }
+  
+    return pays;
+  }
+  let payment_frequency = term3(pane)
+  const term4 = (pane) => {
+    let ast;  
+    if (pane.length === 0) {
+      ast = 'null';
+    } else {
+      ast= pane.pan.assets;
+    }
+  
+    return ast;
+  }
+  let assets = term4(pane)
   let thirty =parseInt(tota)* 30/100
   console.log(thirty)
   let seventy = tota - thirty
@@ -55,11 +118,15 @@ const Select =()=> {
         setMessage("Invalid Information");
       } else {
         result = await result.json();
-      localStorage.setItem('user-info', JSON.stringify(result)) 
-      navigate('/components/pro')
+   
+      navigate('/components/pro', {state:{name}})
       }
     }
+    console.log(Error)
+    console.log(tota)
  console.log(pane)
+ 
+ 
   return(
         <div>
            <Link to='/components/frequent'><i class="fa-solid fa-chevron-left bac"></i></Link>

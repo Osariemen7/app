@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 let tok= JSON.parse(localStorage.getItem("user-info"));
-  let refresh = tok.refresh_token
+const terms = (tok) => {
+  let refreshval;
+
+  if (tok.length === 0) {
+    refreshval = 0;
+  } else {
+    refreshval = tok.refresh_token;
+  }
+
+  return refreshval;
+};
+let refresh = terms(tok)
 const Transact = () =>{
     const [info, setInfo] = useState('')
     const [loading, setLoading] = useState(true);
