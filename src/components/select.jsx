@@ -5,7 +5,7 @@ import Vector from './images/Vector.svg';
 let tok= JSON.parse(localStorage.getItem("user-info"));
 const term = (tok) => {
   let refval;  
-  if (tok.length === 0 || typeof tok === 'undefined') {
+  if (tok === null || typeof tok === 'undefined') {
     refval = 0;
   } else {
     refval = tok.refresh_token;
