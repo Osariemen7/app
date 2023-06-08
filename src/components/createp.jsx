@@ -4,7 +4,7 @@ let tok= JSON.parse(localStorage.getItem("user-info"));
 const terms = (tok) => {
   let refreshval;
 
-  if (length === null || typeof tok === 'undefined')  {
+  if (tok === null || typeof tok === 'undefined')  {
     refreshval = 0;
   } else {
     refreshval = tok.refresh_token;
