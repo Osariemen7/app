@@ -11,7 +11,7 @@ const Accounts =()=> {
     const terms = (tok) => {
       let refreshval;
     
-      if (tok.length === 0) {
+      if (tok === null || typeof tok === 'undefined') {
         refreshval = 0;
       } else {
         refreshval = tok.refresh_token;
