@@ -187,7 +187,7 @@ async function bus(e) {
                     <option>Others</option>
                 </select>
                 <div className="message">{message ? <p>{message}</p> : null}</div>
-                <button className='but' onClick={bus} type="submit">Next</button>
+                <button className='pog' onClick={bus} type="submit">Next</button>
             </form>
         
         </div>

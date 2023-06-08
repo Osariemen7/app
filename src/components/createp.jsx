@@ -53,7 +53,7 @@ const CreatePage =()=>{
               <p className="sp">Expected Monthly Revenue</p>
               <input className="line" onChange={handlePayment} type="text" placeholder="₦0.00" /><br/>
               <div className="message">{message ? <p>{message}</p> : null}</div>
-              <button type="submit" onClick={create} className="but">Continue</button>
+              <button type="submit" onClick={create} className="logb">Continue</button>
            </form>
         </div>
     )

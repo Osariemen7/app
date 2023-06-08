@@ -540,13 +540,21 @@ hr{
 } 
 .logb{
   width:275px;
-    height:35px;
+    height:32px;
     padding:0 2%;
     background-color: blue;
     border: none;
     margin-top: 20px;
     color: #fff;
 } 
+.pog{
+  height: 32px;
+  color:#fff;
+  background-color: blue;
+  width: 254px;
+  margin: 10% 5%;
+  border: 1px solid blue;
+}
   .but1{
     margin: 10px;
     width: 90%;
@@ -584,14 +592,14 @@ hr{
   }
   .lin{
     width:275px;
-    height:35px;
+    height:30px;
     padding: 0 2%;
     margin-bottom: 0;
     }
   .line{
     padding:0 2%;
     width: 265px;
-    height: 35px;
+    height: 30px;
     margin-left:18px ;
   }
   .fot{

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import account_balance from './images/account_balance.svg';
 import user from './images/user.svg';
 import f123 from './images/f123.svg';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 let tok= JSON.parse(localStorage.getItem("user-info"));
@@ -20,7 +20,7 @@ let refresh = term(tok)
  
 const FundPage =()=>{
   const [data, setData] = useState('')
-
+  const navigate = useNavigate()
   const fetchDat = async () => {
     let item ={refresh}
     let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
@@ -38,7 +38,13 @@ const FundPage =()=>{
   headers:{'Authorization': `Bearer ${bab}`},
   })
   response = await response.json()
+  if (response.status !== 200) {
+    navigate(window.location.pathname, { replace: true });
+  } else {  
+  response = await response.json();}
+
   
+
  setData(response)
   
 }

@@ -80,6 +80,11 @@ const ProjectPage =()=>{
       })
       //localStorage.setItem('user-info', JSON.stringify(tok))
       response = await response.json()
+      if (response.status !== 200) {
+        navigate(window.location.pathname, { replace: true });
+      } else {  
+      response = await response.json();}
+    
       setInfo(response)
       setLoading(false)
     }
