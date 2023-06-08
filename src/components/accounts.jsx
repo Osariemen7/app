@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Link, Outlet} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { Helmet } from "react-helmet"
 
 const Accounts =()=> {
@@ -7,6 +7,7 @@ const Accounts =()=> {
   const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
+  const navigate= useNavigate()
     let tok= JSON.parse(localStorage.getItem("user-info"));
     const terms = (tok) => {
       let refreshval;
@@ -111,7 +112,7 @@ return(
                <div>
                   <Link to='./transact'><button className='abut'>Transfer</button></Link>
                </div>
-               <Outlet />
+              
                 <button className='abut'>Overdraft</button>
               </div>
               <p className='l'>RECENT TRANSACTIONS</p>
@@ -150,7 +151,7 @@ return(
                  <div>
                     <Link to='./transact'><button className='abut'>Transfer</button></Link>
                  </div>
-                 <Outlet />
+        
                   <button className='abut'>Overdraft</button>
                 </div>
              </div>
