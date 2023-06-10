@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import OtpInput from 'react-otp-input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 
 const Verify = () => {
     const [otp, setOtp] = useState('');
@@ -33,7 +33,8 @@ const Verify = () => {
     }
     return(
         <div>
-            <i class="fa-solid fa-chevron-left bac"></i>
+        <Link to='/components/signup'><i class="fa-solid fa-chevron-left bac"></i></Link>
+            
             <h2>Verify your phone number</h2>
             <p>Please enter the 4-digit verification code<br/> sent to your phone number in the boxes below</p>
            <div className='dtp'>
