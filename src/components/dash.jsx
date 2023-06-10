@@ -40,10 +40,7 @@ const Dashboard =()=>{
     //   if (data.code === 'token_not_valid'){
     //     navigate('/components/token')
     //   } else {
-      if (response.status !== 200) {
-        navigate('/components/login');
-      } else {  
-      response = await response.json();}
+      
      setUsers(response)
       
      
