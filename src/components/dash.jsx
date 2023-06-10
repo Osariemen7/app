@@ -5,12 +5,13 @@ import stack from './images/stack.svg';
 import sidearrow from './images/sidearrow.svg';
 import money from './images/money.svg';
 import club from './images/club.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Dashboard =()=>{
   const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
+  const navigate = useNavigate()
   
   let tok= JSON.parse(localStorage.getItem("user-info"));
   let refresh = tok.refresh_token
@@ -39,6 +40,10 @@ const Dashboard =()=>{
     //   if (data.code === 'token_not_valid'){
     //     navigate('/components/token')
     //   } else {
+      if (response.status !== 200) {
+        navigate('/components/login');
+      } else {  
+      response = await response.json();}
      setUsers(response)
       
      

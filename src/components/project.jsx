@@ -22,7 +22,6 @@ const ProjectPage =()=>{
     const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
     const [info, setInfo] = useState('')
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate()
     const fetchData = async () => {
         let item ={refresh}
@@ -86,7 +85,6 @@ const ProjectPage =()=>{
       response = await response.json();}
     
       setInfo(response)
-      setLoading(false)
     }
   
     useEffect(() => {

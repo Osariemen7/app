@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet"
 
 const Accounts =()=> {
   const [info, setInfo] = useState('')
-  const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
   const navigate= useNavigate()
@@ -84,9 +83,9 @@ const toggleHidden =()=>{
           navigate(window.location.pathname, { replace: true });
         } else {  
         response = await response.json();}
-      
+
         setInfo(response)
-        setLoading(false);
+      
         }
         useEffect(() => {
           fetchInfo()
