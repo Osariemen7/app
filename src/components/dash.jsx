@@ -17,12 +17,14 @@ const Dashboard =()=>{
   let refresh = tok.refresh_token
   let name = tok.user
  
-
+  const project = () => {
+    navigate(0)
+  }
   
   
     const fetchData = async () => {
         let item ={refresh}
-        let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
+        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -32,7 +34,7 @@ const Dashboard =()=>{
         });
         rep = await rep.json();
         let bab = rep.access_token
-      let response = await fetch("https://sandbox.prestigedelta.com/accounts/",{
+      let response = await fetch("https://api.prestigedelta.com/accounts/",{
       method: "GET",
       headers:{'Authorization': `Bearer ${bab}`},
       })
@@ -44,8 +46,7 @@ const Dashboard =()=>{
       
      setUsers(response)
       
-     
-    }
+     }
   
     useEffect(() => {
       fetchData()
@@ -80,7 +81,10 @@ const toggleHidden =()=>{
         
     return(
         <div>
+        <div className='re'>
             <Link to='/'><i class="fa-solid fa-chevron-left bac"></i></Link>
+            <i onClick={project} class="fa-sharp fa-solid fa-rotate-right"></i>
+        </div> 
             <h3 className='h4'>Hi, {name.first_name} </h3>
             <div className='dash'>
                 <p className='dp'>Total Balance</p>
@@ -101,7 +105,7 @@ const toggleHidden =()=>{
             </div>
             <p className='l'>QUICK ACTION</p>
             <Link to='/components/project' className='link'> <div className='dflex1'>
-                <img src={stack} alt='' />
+                <img  src={stack} alt='' />
                 <div >
                     <h4 className='dh3'>Create project plan</h4>
                     <p className='dfp'>Start your project plan now</p>

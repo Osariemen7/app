@@ -79,12 +79,12 @@ const Select =()=> {
   let thirty =parseInt(tota)* 30/100
   console.log(thirty)
   let seventy = tota - thirty
-  let interest = seventy * 2/100
-  const currentDate = new Date()
+  let interest = seventy * 6/100
+  const currentDate = new Date() 
   const targetAmount = thirty
   const FrequentSavings = payment_amount;
   const remain = Math.ceil(targetAmount - FrequentSavings) / FrequentSavings
-  let repayment_mat =new Date(currentDate.setMonth(currentDate.getMonth() + remain));
+  let repayment_mat =new Date(currentDate.setMonth(currentDate.getMonth() + remain + 1));
   let funding_date = (repayment_mat).toLocaleDateString('en-GB')
   const remains = Math.ceil(seventy - FrequentSavings) / FrequentSavings
   let repayment_mature = new Date(currentDate.setMonth(currentDate.getMonth() + remains));
@@ -93,7 +93,7 @@ const Select =()=> {
   async function agree(e) {
     e.preventDefault();
     let item ={refresh}
-        let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
+        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const Select =()=> {
         let bab = rep.access_token
       console.warn(name, payment_amount, payment_frequency, repayment_maturity, funding_date, assets)
       let project = {name, payment_amount, payment_frequency, repayment_maturity, funding_date, assets};
-      let result = await fetch ('https://sandbox.prestigedelta.com/createproject/',{
+      let result = await fetch ('https://api.prestigedelta.com/createproject/',{
           method: 'POST',
           headers:{
             'Authorization': `Bearer ${bab}`,

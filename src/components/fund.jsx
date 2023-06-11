@@ -27,7 +27,7 @@ const FundPage =()=>{
   }
   const fetchDat = async () => {
     let item ={refresh}
-    let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
+    let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const FundPage =()=>{
     });
     rep = await rep.json();
     let bab = rep.access_token
-  let response = await fetch("https://sandbox.prestigedelta.com/virtualnuban/",{
+  let response = await fetch("https://api.prestigedelta.com/virtualnuban/",{
   method: "GET",
   headers:{'Authorization': `Bearer ${bab}`},
   })

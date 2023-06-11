@@ -21,7 +21,7 @@ const Addlist=()=>{
   const [loading, setLoading] = useState(true);
   const fetchDa = async () => {
     let item ={refresh}
-    let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
+    let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const Addlist=()=>{
     });
     rep = await rep.json();
     let bab = rep.access_token
-  let response = await fetch("https://sandbox.prestigedelta.com/projectlist/",{
+  let response = await fetch("https://api.prestigedelta.com/projectlist/",{
   method: "GET",
   headers:{'Authorization': `Bearer ${bab}`},
   })

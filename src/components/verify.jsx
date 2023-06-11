@@ -1,12 +1,14 @@
 import {useState} from 'react'
 import OtpInput from 'react-otp-input';
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Link, useLocation} from 'react-router-dom';
 
 const Verify = () => {
     const [otp, setOtp] = useState('');
     const navigate = useNavigate()
     const [message, setMessage] = useState("");
-    
+    const location = useLocation();
+  let num = location.state.item
+
    async function vet(e){
         e.preventDefault()
         let res= JSON.parse(localStorage.getItem("user-info"));
@@ -14,7 +16,7 @@ const Verify = () => {
         const item = {otp, reference}
         console.log(JSON.stringify(item))
         // Post the payload using Fetch:
-        let sult= await fetch('https://sandbox.prestigedelta.com/verifyconfirm/', {
+        let sult= await fetch('https://api.prestigedelta.com/verifyconfirm/', {
           method: 'POST',
           headers:{
           'Content-Type': 'application/json'
@@ -28,9 +30,10 @@ const Verify = () => {
       } else {
         sult = await sult.json();
       localStorage.setItem('user-info', JSON.stringify(sult)) 
-      navigate('/components/register')
+      navigate('/components/register', {state:{num}})
       }
     }
+    console.log(num)
     return(
         <div>
         <Link to='/components/signup'><i class="fa-solid fa-chevron-left bac"></i></Link>
