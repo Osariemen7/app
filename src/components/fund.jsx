@@ -21,6 +21,10 @@ let refresh = term(tok)
 const FundPage =()=>{
   const [data, setData] = useState('')
   const navigate = useNavigate()
+
+  const reload =()=>{
+    navigate(0)
+  }
   const fetchDat = async () => {
     let item ={refresh}
     let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
@@ -42,8 +46,6 @@ const FundPage =()=>{
     navigate(window.location.pathname, { replace: true });
   } else {  
   response = await response.json();}
-
-  
 
  setData(response)
   
@@ -80,6 +82,7 @@ console.log(tok)
                   <h3 className='dh3'>{data.account_number}</h3>
                 </div>   
             </div>
+            <button onClick={reload} className='logb'>Get Account</button>
         </div>
     )
 }
