@@ -5,7 +5,6 @@ const Signup = () => {
     const [message, setMessage] = useState("");
     const [messag, setMessag] = useState('')
     const [phone_number, setPhoneNumber] = useState('')
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate()
     
 
@@ -32,13 +31,13 @@ const Signup = () => {
           res = await res.json();
           localStorage.setItem('user-info', JSON.stringify(res))
           setMessag('loading')
-          setLoading(false)
+        
           navigate('/components/verify', {state:{item}});   
 
         }
         console.log(item)
       }
-      if (loading) return "Loading..."
+      
     return(
         <div>
            <Link to='/'><i class="fa-solid fa-chevron-left bac"></i></Link>

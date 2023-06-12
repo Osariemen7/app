@@ -25,7 +25,7 @@ const Accounts =()=> {
 
   const fetchData = async () => {
     let item ={refresh}
-    let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
+    let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const Accounts =()=> {
     });
     rep = await rep.json();
     let bab = rep.access_token
-  let response = await fetch("https://api.prestigefinance.co/accounts/",{
+  let response = await fetch("https://api.prestigedelta.com/accounts/",{
   method: "GET",
   headers:{'Authorization': `Bearer ${bab}`},
   })
