@@ -21,7 +21,7 @@ const TokenPage =()=>{
         let refresh = resi.refresh_token
           console.warn(refresh)
           let item = {refresh};
-          let rest = await fetch ('https://sandbox.prestigedelta.com/dj-rest-auth/token/refresh/',{
+          let rest = await fetch ('https://api.prestigefinance.co/dj-rest-auth/token/refresh/',{
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json',

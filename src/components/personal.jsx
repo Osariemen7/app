@@ -20,7 +20,7 @@ const terms = (tok) => {
     
      banes = "";
     } else {
-      banes = tok.first_name;;
+      banes = tok.first_name;
     }
   
     return banes;
@@ -71,7 +71,7 @@ let dob = `${day}/${month}/${year}`;
 async function bus(e) {
     e.preventDefault();
     let ite ={refresh}
-    let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
+    let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ async function bus(e) {
       setCreateanchoruser(create_anchor_user)
       console.warn(gender, address, dob, bvn, city, state, business_name, business_type, create_anchor_user)
       let item = {gender, address, dob, bvn, city, state, business_name, business_type, create_anchor_user};
-      let result = await fetch ('https://api.prestigedelta.com/updateuser/',{
+      let result = await fetch ('https://api.prestigefinance.co/updateuser/',{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json',

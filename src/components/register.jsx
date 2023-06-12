@@ -47,7 +47,7 @@ const RegisterPage =()=>{
           e.preventDefault();
             console.warn(username, password1, password2, first_name, last_name, middle_name, email)
             let item = {username, password1, password2, first_name, last_name, middle_name, email};
-            let resut = await fetch ('https://api.prestigedelta.com/dj-rest-auth/registration/',{
+            let resut = await fetch ('https://api.prestigefinance.co/dj-rest-auth/registration/',{
                 method: 'POST',
                 headers:{
                   'Content-Type': 'application/json',

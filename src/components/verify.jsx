@@ -16,7 +16,7 @@ const Verify = () => {
         const item = {otp, reference}
         console.log(JSON.stringify(item))
         // Post the payload using Fetch:
-        let sult= await fetch('https://api.prestigedelta.com/verifyconfirm/', {
+        let sult= await fetch('https://api.prestigefinance.co/verifyconfirm/', {
           method: 'POST',
           headers:{
           'Content-Type': 'application/json'

@@ -35,7 +35,7 @@ const LoginPage = () => {
     e.preventDefault();
       console.warn(username, password)
       let item = {username, password};
-      let result = await fetch ('https://api.prestigedelta.com/dj-rest-auth/login/',{
+      let result = await fetch ('https://api.prestigefinance.co/dj-rest-auth/login/',{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json',

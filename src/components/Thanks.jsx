@@ -21,7 +21,7 @@ const ThankPage=()=>{
      async function create(e) {
         e.preventDefault();
         let ite ={refresh}
-    let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
+    let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const ThankPage=()=>{
         setMonthly(monthly_revenue)
           console.warn(monthly_revenue)
           let item = {monthly_revenue};
-          let result = await fetch ('https://api.prestigedelta.com/createaccount/',{
+          let result = await fetch ('https://api.prestigefinance.co/createaccount/',{
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json',

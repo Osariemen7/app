@@ -5,7 +5,7 @@ import Vector from './images/Vector.svg';
 let tok= JSON.parse(localStorage.getItem("user-info"));
 const term = (tok) => {
   let refval;  
-  if (tok === null || typeof tok === 'undefined') {
+  if (typeof tok === 'undefined' || tok === null) {
     refval = 0;
   } else {
     refval = tok.refresh_token;
@@ -21,7 +21,7 @@ const Select =()=> {
   let pane = location.state.pal
   const terms = (pane) => {
     let nam;  
-    if (pane.length === 0) {
+    if (typeof pane === 'undefined'|| pane === null) {
       nam = 'null';
     } else {
       nam = pane.pan.name;
@@ -33,7 +33,7 @@ const Select =()=> {
   
   const term1 = (pane) => {
     let tots;  
-    if (typeof pane === 'undefined' || pane === null || pane.length < 6) {
+    if (typeof pane === 'undefined' || pane === null) {
       tots = 0;
     } else {
       tots= pane.pan.tota;
@@ -80,20 +80,20 @@ const Select =()=> {
   console.log(thirty)
   let seventy = tota - thirty
   let interest = seventy * 6/100
-  const currentDate = new Date() 
+  const currentDate = new Date()
   const targetAmount = thirty
   const FrequentSavings = payment_amount;
   const remain = Math.ceil(targetAmount - FrequentSavings) / FrequentSavings
   let repayment_mat =new Date(currentDate.setMonth(currentDate.getMonth() + remain + 1));
   let funding_date = (repayment_mat).toLocaleDateString('en-GB')
   const remains = Math.ceil(seventy - FrequentSavings) / FrequentSavings
-  let repayment_mature = new Date(currentDate.setMonth(currentDate.getMonth() + remains));
+  let repayment_mature = new Date(currentDate.setMonth(currentDate.getMonth() + remains + 1));
   let repayment_maturity =(repayment_mature).toLocaleDateString('en-GB')
   
   async function agree(e) {
     e.preventDefault();
     let item ={refresh}
-        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
+        let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const Select =()=> {
         let bab = rep.access_token
       console.warn(name, payment_amount, payment_frequency, repayment_maturity, funding_date, assets)
       let project = {name, payment_amount, payment_frequency, repayment_maturity, funding_date, assets};
-      let result = await fetch ('https://api.prestigedelta.com/createproject/',{
+      let result = await fetch ('https://api.prestigefinance.co/createproject/',{
           method: 'POST',
           headers:{
             'Authorization': `Bearer ${bab}`,
@@ -129,7 +129,7 @@ const Select =()=> {
  
   return(
         <div>
-           <Link to='/components/frequent'><i class="fa-solid fa-chevron-left bac"></i></Link>
+           <Link to='/components/createp'><i class="fa-solid fa-chevron-left bac"></i></Link>
             <h4>{name}</h4>
             <p className='rp'>Estimated Project amount</p>
             <h1 className='rh'>₦{total}</h1>
@@ -147,7 +147,7 @@ const Select =()=> {
             </div>
             <div className='rev'>
                 <p>Interest value</p>
-                <p className='revp'>₦{interest}(2%p.a)</p>
+                <p className='revp'>₦{interest}(6%p.a)</p>
             </div>
             <div className='rev'>
                 <p>Est. Maturity date</p>
