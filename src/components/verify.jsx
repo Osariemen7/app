@@ -16,7 +16,7 @@ const Verify = () => {
         const item = {otp, reference}
         console.log(JSON.stringify(item))
         // Post the payload using Fetch:
-        let sult= await fetch('https://api.prestigefinance.co/verifyconfirm/', {
+        let sult= await fetch('https://api.prestigedelta.com/verifyconfirm/', {
           method: 'POST',
           headers:{
           'Content-Type': 'application/json'
@@ -28,8 +28,7 @@ const Verify = () => {
       if (sult.status !== 200) {
         setMessage("Incorrect Otp");
       } else {
-        sult = await sult.json();
-      localStorage.setItem('user-info', JSON.stringify(sult)) 
+        sult = await sult.json(); 
       navigate('/components/register', {state:{num}})
       }
     }

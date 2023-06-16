@@ -15,7 +15,7 @@ const Signup = () => {
       e.preventDefault();
         console.warn(phone_number)
         let item = {phone_number};
-        let res = await fetch ('https://api.prestigefinance.co/verifyinit/',{
+        let res = await fetch ('https://api.prestigedelta.com/verifyinit/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -28,10 +28,10 @@ const Signup = () => {
         if (item.phone_number.length !== 13) {
           setMessage("Invalid Phone number!");
         } else{
+          setMessag('loading')
           res = await res.json();
           localStorage.setItem('user-info', JSON.stringify(res))
-          setMessag('loading')
-        
+          
           navigate('/components/verify', {state:{item}});   
 
         }

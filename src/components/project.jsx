@@ -2,9 +2,17 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import plus from './images/plus.svg';
 
-let tok= JSON.parse(localStorage.getItem("user-info"));
-const terms = (tok) => {
-  let refreshval;
+  
+   
+
+const ProjectPage =()=>{
+    const [users, setUsers] = useState('');
+     const [hidden, setHidden] = useState("******");
+    const [info, setInfo] = useState('')
+    const navigate = useNavigate()
+    let tok= JSON.parse(localStorage.getItem("user-info"));
+    const terms = (tok) => {
+       let refreshval;
 
   if ( tok === null || typeof tok === "undefined" ) {
     refreshval = 0;
@@ -15,17 +23,10 @@ const terms = (tok) => {
   return refreshval;
 };
 let refresh = terms(tok)
-  
-   
 
-const ProjectPage =()=>{
-    const [users, setUsers] = useState('');
-  const [hidden, setHidden] = useState("******");
-    const [info, setInfo] = useState('')
-    const navigate = useNavigate()
     const fetchData = async () => {
         let item ={refresh}
-        let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
+        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ const ProjectPage =()=>{
         });
         rep = await rep.json();
         let bab = rep.access_token
-      let response = await fetch("https://api.prestigefinance.co/accounts/",{
+      let response = await fetch("https://api.prestigedelta.com/accounts/",{
       method: "GET",
       headers:{'Authorization': `Bearer ${bab}`},
       })
@@ -63,7 +64,7 @@ const ProjectPage =()=>{
              }
     const fetchDa = async () => {
         let item ={refresh}
-        let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
+        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -71,9 +72,12 @@ const ProjectPage =()=>{
          },
          body:JSON.stringify(item)
         });
+        if (item === null){
+          navigate(0)
+        }else{
         rep = await rep.json();
         let bab = rep.access_token
-      let response = await fetch("https://sandbox.prestigedelta.com/projectlist/",{
+      let response = await fetch("https://api.prestigedelta.com/projectlist/",{
       method: "GET",
       headers:{'Authorization': `Bearer ${bab}`},
       })
@@ -85,7 +89,7 @@ const ProjectPage =()=>{
       response = await response.json();}
     
       setInfo(response)
-    }
+        }}
   
     useEffect(() => {
       fetchDa()

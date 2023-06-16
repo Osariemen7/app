@@ -80,20 +80,76 @@ const Select =()=> {
   console.log(thirty)
   let seventy = tota - thirty
   let interest = seventy * 6/100
-  const currentDate = new Date()
   const targetAmount = thirty
-  const FrequentSavings = payment_amount;
-  const remain = Math.ceil(targetAmount - FrequentSavings) / FrequentSavings
-  let repayment_mat =new Date(currentDate.setMonth(currentDate.getMonth() + remain + 1));
-  let funding_date = (repayment_mat).toLocaleDateString('en-GB')
-  const remains = Math.ceil(seventy - FrequentSavings) / FrequentSavings
-  let repayment_mature = new Date(currentDate.setMonth(currentDate.getMonth() + remains + 1));
-  let repayment_maturity =(repayment_mature).toLocaleDateString('en-GB')
+  const frequentSavings = payment_amount;
   
+  const paying = (payment_frequency, targetAmount, frequentSavings) => {
+    let repayment_mat;
+    const currentDate = new Date();
+    const remain = Math.ceil(targetAmount / frequentSavings);
+    switch (payment_frequency) {
+      case 'Daily':
+        let startDat = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+        repayment_mat = new Date(startDat.getTime() + remain * 24 * 60 * 60 * 1000);
+        break;
+  
+      case 'Weekly':
+        let startDa = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+        repayment_mat = new Date(startDa.getTime() + remain * 7 * 24 * 60 * 60 * 1000);
+        break;
+  
+      default:
+         let startDate = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() + 1,
+          1
+        );
+        repayment_mat = new Date(startDate.setMonth(startDate.getMonth() + remain));
+        break;
+    }
+  
+    return repayment_mat;
+  };
+  
+  let funding_dat = paying(payment_frequency, targetAmount, frequentSavings);
+  let funding_dates = (funding_dat).toDateString('en-GB')
+  let funding_date = (funding_dat).toLocaleDateString('en-GB')
+  const pay = (payment_frequency, tota, frequentSavings) => {
+    let repayment_mat;
+    const currentDate = new Date();
+    const remain = Math.ceil(tota / frequentSavings);
+    switch (payment_frequency) {
+      case 'Daily':
+        let startDat = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+        repayment_mat = new Date(startDat.getTime() + remain * 24 * 60 * 60 * 1000);
+        break;
+  
+      case 'Weekly':
+        let startDa = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+        repayment_mat = new Date(startDa.getTime() + remain * 7 * 24 * 60 * 60 * 1000);
+        break;
+  
+      default:
+         let startDate = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() + 1,
+          1
+        );
+        repayment_mat = new Date(startDate.setMonth(startDate.getMonth() + remain));
+        break;
+    }
+  
+    return repayment_mat;
+  };
+  
+  let repayment_mature = pay(payment_frequency, tota, frequentSavings);
+  let repayment_maturi = (repayment_mature).toDateString('en-GB')
+  let repayment_maturity = (repayment_mature).toLocaleDateString('en-GB')
+    
   async function agree(e) {
     e.preventDefault();
     let item ={refresh}
-        let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
+        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -105,7 +161,7 @@ const Select =()=> {
         let bab = rep.access_token
       console.warn(name, payment_amount, payment_frequency, repayment_maturity, funding_date, assets)
       let project = {name, payment_amount, payment_frequency, repayment_maturity, funding_date, assets};
-      let result = await fetch ('https://api.prestigefinance.co/createproject/',{
+      let result = await fetch ('https://api.prestigedelta.com/createproject/',{
           method: 'POST',
           headers:{
             'Authorization': `Bearer ${bab}`,
@@ -114,34 +170,37 @@ const Select =()=> {
        },
        body:JSON.stringify(project)
       });
-      if (result.status !== 200) {
+      if (result.status === 400) {
         setMessage("Invalid Information");
+      } else if (result.status === 500) { 
+        setMessage('Click again!');
       } else {
         result = await result.json();
-   
-      navigate('/components/pro', {state:{name}})
+        navigate('/components/pro', { state: { name } });
       }
+      
     }
-    console.log(Error)
+    console.log(funding_date)
+    console.log(name)
     console.log(tota)
- console.log(pane)
+   console.log(pane)
  
  
   return(
         <div>
            <Link to='/components/createp'><i class="fa-solid fa-chevron-left bac"></i></Link>
-            <h4>{name}</h4>
+            <h4 className='shi'>{name}</h4>
             <p className='rp'>Estimated Project amount</p>
             <h1 className='rh'>₦{total}</h1>
             <div className='rev'>
                 <p>Saving target</p>
-             <p className='revp'>{thirty}</p>
+             <p className='revp'>₦{thirty}</p>
             </div>
             <div className='rev'>
                 <p>Recuring Savings</p>
                 <p>₦{payment_amount}/{payment_frequency}</p>
             </div>
-            <div className='rev'>
+            <div className='revd'>
                 <p>Amount to be loan</p>
                 <p>₦{seventy}</p>
             </div>
@@ -151,11 +210,11 @@ const Select =()=> {
             </div>
             <div className='rev'>
                 <p>Est. Maturity date</p>
-                <p>{funding_date}</p>
+                <p>{funding_dates}</p>
             </div>
             <div className='revd'>
                 <p>Est. Repayment date</p>
-                <p>{repayment_maturity}</p>
+                <p>{repayment_maturi}</p>
             </div>
             <div className='dflex'>
             <img src={Vector} alt=''/>

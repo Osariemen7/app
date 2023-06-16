@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet"
 
 const Accounts =()=> {
   const [info, setInfo] = useState('')
-    const [users, setUsers] = useState('');
+  const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
   const navigate= useNavigate()
     let tok= JSON.parse(localStorage.getItem("user-info"));
@@ -64,7 +64,7 @@ const toggleHidden =()=>{
          
          const fetchInfo = async () => {
           let item ={refresh}
-          let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
+          let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const toggleHidden =()=>{
           });
           rep = await rep.json();
           let bab = rep.access_token
-        let response = await fetch("https://sandbox.prestigedelta.com/transactionlist/?start_date=01/31/2023&end_date=07/31/2023",{
+        let response = await fetch("https://api.prestigedelta.com/transactionlist/?start_date=01/31/2023&end_date=07/31/2023",{
         method: "GET",
         headers:{'Authorization': `Bearer ${bab}`},
         })

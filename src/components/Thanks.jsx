@@ -1,6 +1,7 @@
 import tick from './images/tick.svg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 const ThankPage=()=>{
      const [monthly_revenue, setMonthly] = useState(100000)
      const [message, setMessage] = useState("");
@@ -21,7 +22,7 @@ const ThankPage=()=>{
      async function create(e) {
         e.preventDefault();
         let ite ={refresh}
-    let rep = await fetch ('https://api.prestigefinance.co/refreshtoken/',{
+    let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const ThankPage=()=>{
         setMonthly(monthly_revenue)
           console.warn(monthly_revenue)
           let item = {monthly_revenue};
-          let result = await fetch ('https://api.prestigefinance.co/createaccount/',{
+          let result = await fetch ('https://api.prestigedelta.com/createaccount/',{
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json',
@@ -44,14 +45,14 @@ const ThankPage=()=>{
            body:JSON.stringify(item)
           });
           if (result.status !== 201) {
-            setMessage("Some error occured");
+            setMessage(JSON.stringify(result.response));
           } else {
             result = await result.json();
           localStorage.setItem('user-info', JSON.stringify(result)) 
           navigate('/components/login')
           }
-          
-       }
+        }
+        console.log(tok)
     return(
         <div className='tha'>
            <div className=''>
