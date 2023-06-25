@@ -22,6 +22,7 @@ const ThankPage=()=>{
      async function create(e) {
         e.preventDefault();
         let ite ={refresh}
+        
     let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
         method: 'POST',
         headers:{
@@ -45,10 +46,11 @@ const ThankPage=()=>{
            body:JSON.stringify(item)
           });
           if (result.status !== 201) {
-            setMessage(JSON.stringify(result.response));
+            result = await result.json()
+            setMessage(JSON.stringify(result));
           } else {
             result = await result.json();
-          localStorage.setItem('user-info', JSON.stringify(result)) 
+          localStorage.setItem('user-info', JSON.stringify(tok)) 
           navigate('/components/login')
           }
         }

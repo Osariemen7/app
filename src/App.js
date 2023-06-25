@@ -21,7 +21,10 @@ import ListPage from './components/listp';
 import Frequent from './components/frequent';
 import Accounts from './components/accounts';
 import Transact from './components/transact';
-import Pro from './components/pro'
+import Pro from './components/pro';
+import Club from './components/club';
+import CreateClub from './components/cclub';
+import Join from './components/joinc'
 function App() {
   const [loading, setLoading] = useState(true)
 
@@ -55,7 +58,10 @@ function App() {
         <Route path="/components/transact" element={<Transact />} />
         <Route path ='/components/Addlist' element={<Transact />} />
         <Route path='/components/pro' element={<Pro />} />
-      
+        <Route path='/components/club' element={<Club />}/>
+        <Route path='/components/joinc' element={<Join />} />
+        <Route path='/components/cclub' element={<CreateClub />} />
+        
      </Routes>
       
     </div>

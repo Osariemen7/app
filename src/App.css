@@ -147,8 +147,12 @@ hr{
 }
 .plus{
   margin-top: 290px;
-  margin-left: 210px;
-  height: 80px;
+  width:275px;
+  height:32px;
+  padding:0 2%;
+  background-color: blue;
+  border: none;
+  color: #fff;
 }
 .bac{
   position: relative;
@@ -240,6 +244,13 @@ hr{
   width: 120px;
   background-color: lightcyan;
 }
+.mon1{
+  border: 1px solid lightcyan;
+  width: 150px;
+  background-color: lightcyan;
+  font-size: 18px;
+  padding:2% ;
+}
 .freq{
   display: flex;
   gap:10px;
@@ -282,24 +293,28 @@ hr{
   height: 5px;
   background-color: blue;
   margin-top: 10%;
-  margin-left: 5%;
   margin-bottom: 2%;
 }
-
-.progress-bar:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color:gray;
-  transition: width 0.3s ease-in-out;
+.cl{
+  margin-top: 40%;
+}
+.clt{
+  margin-bottom: 35%;
+}
+.cut{
+    width: 90%;
+    height: 50px;
+    background-color: skyblue;
+    border: none;
+    color:blue;
+    margin-bottom: 25%;
 }
 .pd{
   border: 1px solid gainsboro;
   margin:2% 9%;
   border-radius: 5%;
   padding:2% 5%;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
 }
 .pp{
   display: flex;
@@ -318,11 +333,7 @@ hr{
   font-size: 11px;
   font-weight: 700;
 }
-.plus1{
-  margin: 0;
-  margin-left: 210px;
-  height: 80px;
-}
+
 .ah3{
   text-align: left;
   margin-top: 2%;
@@ -451,10 +462,11 @@ hr{
 }
 .dflex2{
    display: flex;
-   gap:40px;
+   gap:50px;
    margin: 0 10%;
-   margin-top: 5%;
+   margin-top: 10%;
    padding: 5%;
+   position:fixed;
    }
 .dfp2{
   font-size: 13px;
@@ -489,6 +501,62 @@ hr{
   background-color: #fff;
   height: 500px;
   
+}
+.clup{
+  display: flex;
+  gap: 10px;
+  padding:3% 5%;
+  
+
+}
+.clu{
+  background-color:  #F8F9FC;
+  border: 1px solid  #F8F9FC;;
+  padding: 3%;
+  text-align: left;
+  margin-top: 0;
+  border-radius: 4px;
+  width: 150px;
+  height: 72px;
+}
+.clund{
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+.ppn{
+  display: flex;
+  gap: 30%;
+  padding: 0;
+  height: 20px;
+  font-size: 13px;
+}
+.clun{
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.progress-b {
+  height: 100%;
+  background-color: lightblue;
+  transition: width 0.3s ease-in-out;
+}
+.cpp{
+  display: flex;
+  gap:10px;
+  padding: 2% 8%;
+}
+.cprog{
+  height: 5px;
+  width: 100%;
+}
+.cpn{
+  margin-top: 0;
+}
+.cprof{
+  background-color: blue;
+  color:#fff;
+  border-radius: 50%;
+  padding: 6%;
 }
 .see{
   font-size: 15px;

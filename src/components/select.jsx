@@ -172,8 +172,8 @@ const Select =()=> {
       });
       if (result.status === 400) {
         setMessage("Invalid Information");
-      } else if (result.status === 500) { 
-        setMessage('Click again!');
+      } else if (result.status === 401 ) { 
+        navigate('/components/login');
       } else {
         result = await result.json();
         navigate('/components/pro', { state: { name } });

@@ -69,7 +69,7 @@ console.log(tok)
             <div className="fflex">
                 <img src={user} alt=''/>
                 <div>
-                  <p className='fdiv'>Name</p>
+                  <p className='fdiv'>Account Name</p>
                   <h3 className='dh3'>{data.account_name}</h3>
                 </div>   
             </div>

@@ -122,7 +122,7 @@ if(loading) {
             <img src={Vector} alt=''/>
                 <p className='dfp'>Maturity date may depend on your ability to make the payment on schedule</p>
             </div>
-            <div className="adf">
+            <div className="pd">
               <div className="asav">
                  <p>Savings Target(30%)</p>
                  <p>Maturity Date</p>
@@ -132,7 +132,7 @@ if(loading) {
                 <p>{(new Date(info[0].maturity_day)).toLocaleDateString('en-GB')}</p>
               </div>
             </div>
-            <div className="adf">
+            <div className="pd">
                <div className="asa2">
                   <p>Interest Value(2% p.a)</p>
                   <p>Repayment Date</p>

@@ -53,9 +53,12 @@ const Dashboard =()=>{
       })
       response = await response.json()
       localStorage.setItem('user-info', JSON.stringify(tok))
-      
+      if (response.status === 401){
+        navigate('/components/login')
+      } else {
      setUsers(response)
-
+      
+      }
        
      }
   
@@ -159,7 +162,7 @@ const toggleHidden =()=>{
                   <p className='dfp'>Project</p>
                 </div>
                 <div>
-                  <i class="fa-solid fa-people-group home"></i>
+                <Link to='/components/club'><i class="fa-solid fa-people-group home"></i></Link>
                   <p className='dfp'>Club</p>
                 </div>
                 <div>
