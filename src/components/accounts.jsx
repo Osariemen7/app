@@ -3,7 +3,70 @@ import {Link, useNavigate} from "react-router-dom";
 import { Helmet } from "react-helmet"
 
 const Accounts =()=> {
-  const [info, setInfo] = useState('')
+  const [info, setInfo] = useState([
+    {
+        "id": 2,
+        "name": "first",
+        "status": "inactive",
+        performance: 0.0,
+        my_membership: {
+            "member": {
+                "phone_number": "2349020161808",
+                "first_name": "Osagumwenro",
+                "last_name": "Aibueku",
+                "username": "2349020161808",
+                "email": "aibuekuosagumwro@gmail.com"
+            },
+            "invite_code": "CNZ33",
+            "admin": false,
+            "super_admin": false,
+            "valid_admin": true,
+            "invited_by": {
+                "phone_number": "2348069234749",
+                "first_name": "Osariemen",
+                "last_name": "Aibueku",
+                "username": "2348069234749",
+                "email": "osariemwen7@gmail.com"
+            },
+            "performance": 0.0,
+            "member_status": "Very poor",
+            "projects_no": "6",
+            "in_default": false,
+            "blacklisted": false,
+            "invite_slots": "5",
+            "last_deposit": null,
+            "join_date": "2023-06-24T12:49:54.777962Z"
+        },
+        "members_no": "2",
+        "projects_no": "14",
+        "members": [
+            {
+                "member": {
+                    "phone_number": "2348069234749",
+                    "first_name": "Osariemen",
+                    "last_name": "Aibueku",
+                    "username": "2348069234749",
+                    "email": "osariemwen7@gmail.com"
+                },
+                "invite_code": "JHC9",
+                "admin": false,
+                "super_admin": true,
+                "valid_admin": true,
+                "invited_by": {
+                    "username": ""
+                },
+                "performance": 0.0,
+                "member_status": "Very poor",
+                "projects_no": "8",
+                "in_default": false,
+                "blacklisted": false,
+                "invite_slots": "4",
+                "last_deposit": null,
+                "join_date": "2023-06-23T20:23:36.242026Z"
+            }
+        ]
+    }
+])
   const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
   const navigate= useNavigate()

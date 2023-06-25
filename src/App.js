@@ -25,6 +25,7 @@ import Pro from './components/pro';
 import Club from './components/club';
 import CreateClub from './components/cclub';
 import Join from './components/joinc'
+import Fclub from './components/fclub'
 function App() {
   const [loading, setLoading] = useState(true)
 
@@ -61,6 +62,7 @@ function App() {
         <Route path='/components/club' element={<Club />}/>
         <Route path='/components/joinc' element={<Join />} />
         <Route path='/components/cclub' element={<CreateClub />} />
+        <Route path='/components/fclub' element={<Fclub />} />
         
      </Routes>
       
