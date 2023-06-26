@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 const Club = () => {
     const [info, setInfo] = useState('')
     const [users, setUsers] = useState('')
-    const [invite, setInvite] = useState('')
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
     let tok= JSON.parse(localStorage.getItem("user-info"));
@@ -87,10 +86,6 @@ useEffect(() => {
       return(
       <p>Loading</p>)
     }else{
-        if (info[0].my_membership.super_admin === true){
-            let tril = info[0].my_membership.invite_code
-            setInvite( {tril})
-          }
         return(
             <div>
             <h2 className='head'>Group</h2>
@@ -112,7 +107,11 @@ useEffect(() => {
                     </div>
                    
                 </div>
-                <div>{invite ? <p>Invite Code:{invite}</p> : null}</div>
+                <div>
+  {info[0].my_membership.super_admin === true ? (
+    <p>Invite Code: {info[0].my_membership.invite_code}</p>
+  ) : null}
+</div>
                 <p></p>
                <div className='clup'>
                 <div className='clu'>
