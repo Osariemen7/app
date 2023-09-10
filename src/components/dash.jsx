@@ -5,39 +5,42 @@ import stack from './images/stack.svg';
 import sidearrow from './images/sidearrow.svg';
 import money from './images/money.svg';
 import club from './images/club.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 
 
 const Dashboard =()=>{
   const [users, setUsers] = useState('');
   const [hidden, setHidden] = useState("******");
   const navigate = useNavigate()
-  
+  const [sidebar, setSidebar] = useState('')
+  const [info, setInfo] = useState('')
+
+  const showSidebar = () => setSidebar(!sidebar)
+
   let tok= JSON.parse(localStorage.getItem("user-info"));
   let refresh = tok.refresh_token
   let name = tok.user
   
- 
-  const project = () => {
-    localStorage.setItem('user-info', JSON.stringify(tok))
-    navigate('/components/project')
-  }
-  // useEffect(() => {
-  //   const reloadCount = sessionStorage.getItem('reloadCount');
-    
-  //   if (!reloadCount || reloadCount < 2) {
-  //     const updatedReloadCount = reloadCount ? parseInt(reloadCount) + 1 : 1;
-  //     sessionStorage.setItem('reloadCount', String(updatedReloadCount));
-  //     window.location.reload();
-  //   } else {
-  //     sessionStorage.removeItem('reloadCount');
-  //   }
-  // }, []);
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      // You can prevent the default behavior here if needed
+      event.preventDefault();
+      
+       // Redirect the user to the login page
+       window.location.href = '/components/login';
+      };
   
+      // Add a listener for the popstate event (back button press)
+      window.addEventListener('popstate', handleBackButton);
+  
+      // Clean up the listener when the component unmounts
+      return () => {
+        window.removeEventListener('popstate', handleBackButton);
+      };    }, []);
   
     const fetchData = async () => {
         let item ={refresh}
-        let rep = await fetch ('https://api.prestigedelta.com/refreshtoken/',{
+        let rep = await fetch ('https://sandbox.prestigedelta.com/refreshtoken/',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json',
@@ -47,25 +50,31 @@ const Dashboard =()=>{
         });
         rep = await rep.json();
         let bab = rep.access_token
-      let response = await fetch("https://api.prestigedelta.com/accounts/",{
+      let response = await fetch("https://sandbox.prestigedelta.com/accounts/",{
       method: "GET",
       headers:{'Authorization': `Bearer ${bab}`},
       })
+      let respet = await fetch("https://sandbox.prestigedelta.com/tasks/",{
+    method: "GET",
+    headers:{'Authorization': `Bearer ${bab}`},
+    })
+      respet = await respet.json();
       response = await response.json()
       localStorage.setItem('user-info', JSON.stringify(tok))
       if (response.status === 401){
         navigate('/components/login')
       } else {
      setUsers(response)
-      
+     setInfo(respet)
       }
-       
-     }
+    }
   
     useEffect(() => {
       fetchData()
     }, [])
+    
     console.log(tok)
+    
     
 //   useEffect(() => {
 //     fetch('https://sandbox.prestigedelta.com/accounts/')
@@ -77,7 +86,7 @@ const Dashboard =()=>{
 let wark =users[0]
 
 console.log(users) 
-
+console.log(info)
 
 const toggleHidden =()=>{
   
@@ -91,25 +100,50 @@ const toggleHidden =()=>{
         }
         setHidden("******")
       }
-      // useEffect(() => {
-      //   const reloadCount = sessionStorage.getItem('reloadCount');
       
-      //   if (!reloadCount || parseInt(reloadCount) < 2) {
-      //     const updatedReloadCount = reloadCount ? parseInt(reloadCount) + 1 : 1;
-      //     sessionStorage.setItem('reloadCount', String(updatedReloadCount));
-      //     if (!reloadCount) {
-      //       window.location.reload();
-      //     }
-      //   } else {
-      //     sessionStorage.removeItem('reloadCount');
-      //   }
-      // }, []);
         
     return(
         <div>
-            <Link to='/'><i class="fa-solid fa-chevron-left bac"></i></Link>
-
-            <h3 className='dah3'>Hi, {name.first_name} </h3>
+            <i onClick={showSidebar} class="fa-solid fa-bars ac"></i>
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+                <ul className='nav-menu-item'>
+                    <li className='nav-close'>
+                    <i onClick={showSidebar} class="fa-solid fa-x"></i>
+                    </li>
+                    <li className='nav-list'>
+                    <Link to='/components/dash' className='nav-text'><i class="fa-solid fa-house"></i>
+                    <span className='dfp'>Home</span></Link>
+                    </li>
+                    <li className='nav-list'>
+                    <Link to='/components/accounts' className='nav-text'><i class="fa-solid fa-wallet home"></i>
+                      <span className='dfp'>Account</span></Link>
+                    </li>
+                    <li className='nav-list'>
+                    <Link to='/components/savings' className='nav-text'><i class="fa-solid fa-money-bill"></i>
+                      <span className='dfp'>Sub-Account</span></Link>
+                    </li>
+                    <li className='nav-list'>
+                    <Link to='/components/customer' className='nav-text'><i class="fa-solid fa-people-roof"></i>
+                      <span className='dfp'>Customers</span></Link>
+                    </li>
+                    <li className='nav-list'>
+                    <Link to='/components/project' className='nav-text'><i class="fa-solid fa-layer-group home"></i>
+                  <span className='dfp'>Project</span></Link>
+                    </li>
+                    <li className='nav-list'>
+                    <Link to='/components/club' className='nav-text'><i class="fa-solid fa-people-group home"></i>
+                     <span className='dfp'>Club</span></Link>
+                    </li>
+                    <li className='nav-list'>
+                    
+                    <Link to='/components/login' className='nav-text'><i class="fa-solid fa-share"></i>
+                      <span className='dfp'>Log Out</span></Link>
+                    </li>
+                
+                    
+                </ul>
+            </nav>
+            <h3 className='h4'>Hi, {name.first_name} </h3>
             <div className='dash'>
                 <p className='dp'>Total Balance</p>
                 
@@ -127,9 +161,11 @@ const toggleHidden =()=>{
                   <p className='dfp'>Get access to loan when you save 30% of your estimated project amount</p>
                 </div>   
             </div>
+       {info.label === '' ? (
+            <div>
             <p className='l'>QUICK ACTION</p>
             <Link to='/components/project' className='link'> <div className='dflex1'>
-                <img  src={stack} alt='' />
+                <img src={stack} alt='' />
                 <div >
                     <h4 className='dh3'>Create project plan</h4>
                     <p className='dfp'>Start your project plan now</p>
@@ -152,25 +188,36 @@ const toggleHidden =()=>{
                 </div>
                 <img src={sidearrow} alt='' />
             </div>
-            <footer className='dflex2'>
+            </div> ) :
+            <div>
+            <p className='l'>Quick Action</p>
+            <Link to='/components/project' className='link'> <div className='dflex1'>
+                <img src={stack} alt='' />
+                
                 <div>
-                  <i class="fa-solid fa-house home1"></i>
-                  <p className='dfp'>Home</p>
+                    <h4 className='dh3'>Create Your Project Plan</h4>
+                    <p className='dfp'>Start your project plan</p>
                 </div>
-                <div>
-                <Link to='/components/project'><i class="fa-solid fa-layer-group home"></i></Link>
-                  <p className='dfp'>Project</p>
+                <img src={sidearrow} alt='' />
+            </div></Link>
+            <div className='dflex1'>
+                <img src={money} alt='' />
+                <div >
+                    <h4 className='dh3'>Get quick credit</h4>
+                    <p className='dfp'>Start your project plan now</p>
                 </div>
-                <div>
-                <Link to='/components/club'><i class="fa-solid fa-people-group home"></i></Link>
-                  <p className='dfp'>Club</p>
+                <img src={sidearrow} alt='' />
+            </div>
+            <div className='dflex1'>
+                <img src={club} alt='' />
+                <div >
+                    <h4 className='dh3'>Create lending club</h4>
+                    <p className='dfp'>Start your project plan now</p>
                 </div>
-                <div>
-                <Link to='/components/accounts'><i class="fa-solid fa-wallet home"></i></Link>
-                  
-                  <p className='dfp'>Account</p>
-                </div> 
-            </footer>
+                <img src={sidearrow} alt='' />
+            </div>
+            </div> }
+            
         </div>
     )
 }
